@@ -4,16 +4,20 @@
 'title' => $content->title,
 'subtitle' => 'Explore, Share, Inspire'
 ])
-@if(session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
+
+<div class="container col-md-10 col-lg-8 col-xl-7 text-center">
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif 
 </div>
-@endif
-@if(session('error'))
-<div class="alert alert-danger">
-    {{ session('error') }}
-</div>
-@endif
+
 @section('content')
       <article class="mb-4">
         <div class="container px-4 px-lg-5">

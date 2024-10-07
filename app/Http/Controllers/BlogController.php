@@ -27,7 +27,8 @@ class BlogController extends Controller
     public function viewSingleBlog($id){
         $blog = DB::table('blogs')->find($id);
         if($blog){
-            return view('singleBlog', ['content' => $blog]);
+            $comments = DB::table('comments')->where('blog_id', '=', $id)->get();
+            return view('singleBlog', ['content' => $blog, 'comments' => $comments]);
         }else{
         return redirect()->back()->with('error', 'Failed to fetch blog. Please try again.')->withInput();
         }

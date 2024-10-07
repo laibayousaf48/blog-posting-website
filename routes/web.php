@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Middleware\ValidUser;
+use App\Http\Middleware\Authenticate;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\UserController;
-use App\Http\Middleware\Authenticate;
-use App\Http\Middleware\ValidUser;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentController;
 
 Route::get('/', [BlogController::class, 'showBlogs'])->name('home');
 Route::get('/about', function () {
@@ -43,5 +44,10 @@ Route::post('/login', [UserController::class, 'login'])->name('loginMatch');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/forgot-password', [UserController::class, 'forgot'])->name('forgot');
 Route::post('/forgot-password', [UserController::class, 'forgotPassword'])->name('forgot');
-Route::get('/set-password/{query}', [UserController::class, 'setPassword'])->name('setPassword');
-Route::post('/set-password/{query}', [UserController::class, 'resetPassword'])->name('resetPassword');
+// Route::get('/set-password/{query}', [UserController::class, 'setPassword'])->name('setPassword');
+// Route::post('/set-password/{query}', [UserController::class, 'resetPassword'])->name('resetPassword');
+
+Route::get('/set-password/{token}', [UserController::class, 'setPassword'])->name('setPassword');
+Route::post('/set-password/{token}', [UserController::class, 'resetPassword'])->name('resetPassword');
+
+Route::post('/blogs/{blog}/comments', [CommentController::class, 'store'])->name('comments.store');

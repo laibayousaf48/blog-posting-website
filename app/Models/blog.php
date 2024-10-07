@@ -14,4 +14,10 @@ class blog extends Model
         'title',
         'blog',
     ];
+    
+    public function comments()
+{
+    return $this->hasMany(Comment::class);
+}
+
 }

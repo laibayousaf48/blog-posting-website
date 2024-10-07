@@ -40,7 +40,7 @@
 
 
                     <h3 class="py-8 text-center">Set Your Password</h3>
-                    <form id="contactForm" data-sb-form-api-token="API_TOKEN" method="POST" action="{{route('resetPassword',['query'=> $query])}}">
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN" method="POST" action="{{route('resetPassword',['token'=> $token])}}">
                         @csrf
                       
                         <div class="form-floating">

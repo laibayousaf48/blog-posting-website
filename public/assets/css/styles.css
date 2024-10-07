@@ -10797,23 +10797,62 @@ header.masthead .post-heading .meta a {
   }
 }
 
-/* .login-main {
-  background-image: url('assets/img/login.jpg');
-  background-size: cover;
-  background-position: center;
+.comments-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
 }
 
-.login-background-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.7);
-  z-index: 1; 
+.comment-form {
+  margin-bottom: 20px;
 }
 
-.login-container {
-  position: relative; 
-  z-index: 2;
-} */
+.comment-form input,
+.comment-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.comment-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comment-form button:hover {
+  background-color: #0056b3;
+}
+
+.comment-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comment-list li {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.comment-list li strong {
+  display: block;
+  margin-bottom: 5px;
+}
+.comment-content {
+  flex-grow: 1; /* Allows the comment content to take up remaining space */
+}
+
+.card {
+  background-color: #f8f9fa; /* Light background for the comment card */
+}

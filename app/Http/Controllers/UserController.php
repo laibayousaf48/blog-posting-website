@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\query;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\query;
+use Illuminate\Support\Str;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+
 
 class UserController extends Controller
 {
@@ -59,15 +63,26 @@ if($user){
          $user = DB::table('users')->where('email', $email['email'])->first();
         //  dd($user);
          if($user){
-            return redirect()->route('setPassword', ['query'=> $user->id]);
+            // $status = Password::sendResetLink(
+            //     $req->only('email')
+            // );
+            // return $status === Password::RESET_LINK_SENT
+            //     ? back()->with(['status' => __($status)])
+            //     : back()->withErrors(['email' => __($status)]);
+            return redirect()->route('setPassword', ['token'=> $user->id]);
+            // return redirect()->route('setPassword', ['query'=> $user->id]);
          }else{
             return redirect()->back()->with('error', 'User with this email does not exist! please Sign up First!');
          }
     }
 
-    public function setPassword(Request $req, $query){
-        return view('auth.setPassword', ['query'=> $query]);
-   }
+//     public function setPassword(Request $req, $query){
+//         return view('auth.setPassword', ['query'=> $query]);
+//    }
+
+public function setPassword(Request $req, $token){
+    return view('auth.setPassword', ['token'=> $token]);
+}
 
    public function resetPassword(Request $req, $query){
       $data = $req->validate([
@@ -75,7 +90,6 @@ if($user){
       ]);
       $user = DB::table('users')->where('id', $query)->first();
       if($user){
-        //   $user->password = bcrypt($data['password']);
         DB::table('users')->where('id', $query)->update(['password' => bcrypt($data['password'])]);
        return redirect()->route('home')->with('success', 'Password Reset Successfully!');
       }else{
